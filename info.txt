@@ -1,0 +1,7 @@
+docker network create mycybernet
+
+docker build -t mymongoimg .
+docker run --network mycybernet --name mymongocont -p 27017:27017 -d mymongoimg
+
+docker build -t mybackend .
+docker run  --network mycybernet --name mybackendcont -p 4000:4000  mybackend

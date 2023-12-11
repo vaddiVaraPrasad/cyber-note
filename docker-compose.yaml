@@ -1,0 +1,31 @@
+version: "3.9"
+
+services:
+  mymongo:
+    image: mongo:latest
+    restart: always
+    volumes:
+      - mongo_db:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: varaprasad
+      MONGO_INITDB_ROOT_PASSWORD: Vachira_04
+      MONGO_INITDB_DATABASE: cyber-note
+    ports:
+      - 27017:27017
+
+  node_api:
+    container_name: node_api
+    build:
+      context: backend
+      dockerfile: dockerfile
+    ports:
+      - 4000:4000
+    environment:
+      PORT: 4000
+      MONGODB_URI: mongodb://varaprasad:Vachira_04@mymongo:27017/cyber-note?authSource=admin
+      JWT_SECRET: Vachira_04
+    depends_on:
+      -  mymongo
+
+volumes:
+   mongo_db: {} 

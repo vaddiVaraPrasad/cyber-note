@@ -8,9 +8,9 @@ import noteRouter from "./routes/noteRoutes.js";
 dotenv.config();
 const app = express();
 app.use(cors());
+console.log("before connecting");
 connectDB();
 app.use(express.json());
-
 app.get("/test", (req, res) => {
   res.send("Helo from server");
 });
